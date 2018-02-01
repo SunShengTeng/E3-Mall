@@ -1,4 +1,4 @@
-package cn.sst.e3mall.commonResult;
+package cn.sst.e3mall.common.Results;
 
 import java.io.Serializable;
 import java.util.List;
