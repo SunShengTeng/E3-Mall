@@ -21,4 +21,19 @@ public interface ContentCategoryService {
 	 * @return
 	 */
 	E3Result insertContentCategory(long parentId, String name);
+
+	/**
+	 * 删除分类
+	 * @param id
+	 * @return
+	 */
+	E3Result deleteContentCategory(long id);
+
+	/**
+	 * 更新分类名称
+	 * @param id
+	 * @param name
+	 * @return
+	 */
+	E3Result updateContentCategory(Long id, String name);
 }

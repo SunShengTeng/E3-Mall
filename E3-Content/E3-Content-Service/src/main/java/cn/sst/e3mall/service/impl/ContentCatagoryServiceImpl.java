@@ -1,5 +1,6 @@
 package cn.sst.e3mall.service.impl;
 
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -67,6 +68,42 @@ public class ContentCatagoryServiceImpl implements ContentCategoryService {
 		// 4、需要主键返回。
 		// 5、返回E3Result，其中包装TbContentCategory对象
 		return E3Result.ok(tbContentCategory);
+	}
+
+	@Override
+	public E3Result deleteContentCategory(long id) {
+		
+		//1、查处要删除的节点
+		TbContentCategory contentCategory = contentCategoryMapper.selectByPrimaryKey(id);
+		//2、查询改节点的兄弟节点
+		TbContentCategoryExample contentCategoryExample = new TbContentCategoryExample();
+		Criteria criteria = contentCategoryExample.createCriteria();
+		criteria.andParentIdEqualTo(contentCategory.getParentId());
+		int countByExample = contentCategoryMapper.countByExample(contentCategoryExample);
+		if (countByExample > 1) {
+			// 3、有兄弟，直接删除当前子节点
+			contentCategoryMapper.deleteByPrimaryKey(id);
+		}else {
+			// 4.1、没有兄弟节点了，删除改节点以后要更改父节点的isParent
+			TbContentCategory parentContentCategory = new TbContentCategory();
+			parentContentCategory.setId(contentCategory.getParentId());
+			parentContentCategory.setIsParent(false);
+			contentCategoryMapper.updateByPrimaryKeySelective(parentContentCategory);
+			
+			contentCategoryMapper.deleteByPrimaryKey(id);
+		}	
+		// TODO :需要加一个判断，如果删除的是父分类，需要给出解决方案：1、级联删除，2、给友情提示“只能一级一级的删除”
+		// 4、响应结果
+		return E3Result.ok();
+	}
+
+	@Override
+	public E3Result updateContentCategory(Long id, String name) {
+		TbContentCategory contentCategory = new TbContentCategory();
+		contentCategory.setId(id);
+		contentCategory.setName(name);
+		contentCategoryMapper.updateByPrimaryKeySelective(contentCategory);
+		return E3Result.ok();
 	}
 
 }
