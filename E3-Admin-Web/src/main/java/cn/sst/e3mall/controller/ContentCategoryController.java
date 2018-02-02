@@ -41,4 +41,27 @@ public class ContentCategoryController {
 	public E3Result createContentCategory(long parentId,String name){
 		return contentCategoryServiceImpl.insertContentCategory(parentId,name);
 	}
+	
+	/**
+	 * 删除分类
+	 * @param id
+	 * @return
+	 */
+	@RequestMapping("/delete")
+	@ResponseBody
+	public E3Result deleteContentCategory(long id){
+		return contentCategoryServiceImpl.deleteContentCategory(id);
+	}
+	
+	/**
+	 * 更新分类名称
+	 * @param id
+	 * @param name
+	 * @return
+	 */
+	@RequestMapping("/update")
+    @ResponseBody
+    public E3Result updateContentCategory(Long id,String name){
+		return contentCategoryServiceImpl.updateContentCategory(id,name);
+	}
 }
