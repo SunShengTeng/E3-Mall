@@ -4,6 +4,7 @@ import java.util.List;
 
 import cn.sst.e3mall.common.Results.EasyUITreeNode;
 import cn.sst.e3mall.common.Utils.E3Result;
+import cn.sst.e3mall.pojo.TbContent;
 
 public interface ContentCategoryService {
 
@@ -36,4 +37,5 @@ public interface ContentCategoryService {
 	 * @return
 	 */
 	E3Result updateContentCategory(Long id, String name);
+	
 }

@@ -1,6 +1,8 @@
 package cn.sst.e3mall.service;
 
 
+import java.util.List;
+
 import cn.sst.e3mall.common.Results.EasyUIDataGridResult;
 import cn.sst.e3mall.common.Utils.E3Result;
 import cn.sst.e3mall.pojo.TbContent;
@@ -40,4 +42,10 @@ public interface ContentService {
 	 */
 	E3Result deleteContentByContentId(String[] split);
 
+	/**
+	 * 根据分类ID，获取对应分类下的内容
+	 * @param cid
+	 * @return
+	 */
+	List<TbContent> getContentByCategoryId(Long cid);
 }
