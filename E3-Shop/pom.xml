@@ -9,6 +9,11 @@
 	<artifactId>E3-Shop</artifactId>
 	<packaging>war</packaging>
 	<dependencies>
+		<dependency>
+			<groupId>cn.sst</groupId>
+			<artifactId>E3-Content-Interface</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
 		<!-- JSP相关 -->
 		<dependency>
 			<groupId>jstl</groupId>
@@ -76,11 +81,6 @@
 		<dependency>
 			<groupId>com.github.sgroschupf</groupId>
 			<artifactId>zkclient</artifactId>
-		</dependency>
-		<!-- 文件上传组件 -->
-		<dependency>
-			<groupId>commons-fileupload</groupId>
-			<artifactId>commons-fileupload</artifactId>
 		</dependency>
 
 	</dependencies>

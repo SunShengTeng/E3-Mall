@@ -1,6 +1,5 @@
 package cn.sst.e3mall.service.impl;
 
-
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -11,9 +10,12 @@ import org.springframework.stereotype.Service;
 import cn.sst.e3mall.common.Results.EasyUITreeNode;
 import cn.sst.e3mall.common.Utils.E3Result;
 import cn.sst.e3mall.mapper.TbContentCategoryMapper;
+import cn.sst.e3mall.mapper.TbContentMapper;
+import cn.sst.e3mall.pojo.TbContent;
 import cn.sst.e3mall.pojo.TbContentCategory;
 import cn.sst.e3mall.pojo.TbContentCategoryExample;
 import cn.sst.e3mall.pojo.TbContentCategoryExample.Criteria;
+import cn.sst.e3mall.pojo.TbContentExample;
 import cn.sst.e3mall.service.ContentCategoryService;
 
 @Service
@@ -72,10 +74,10 @@ public class ContentCatagoryServiceImpl implements ContentCategoryService {
 
 	@Override
 	public E3Result deleteContentCategory(long id) {
-		
-		//1、查处要删除的节点
+
+		// 1、查处要删除的节点
 		TbContentCategory contentCategory = contentCategoryMapper.selectByPrimaryKey(id);
-		//2、查询改节点的兄弟节点
+		// 2、查询改节点的兄弟节点
 		TbContentCategoryExample contentCategoryExample = new TbContentCategoryExample();
 		Criteria criteria = contentCategoryExample.createCriteria();
 		criteria.andParentIdEqualTo(contentCategory.getParentId());
@@ -83,15 +85,15 @@ public class ContentCatagoryServiceImpl implements ContentCategoryService {
 		if (countByExample > 1) {
 			// 3、有兄弟，直接删除当前子节点
 			contentCategoryMapper.deleteByPrimaryKey(id);
-		}else {
+		} else {
 			// 4.1、没有兄弟节点了，删除改节点以后要更改父节点的isParent
 			TbContentCategory parentContentCategory = new TbContentCategory();
 			parentContentCategory.setId(contentCategory.getParentId());
 			parentContentCategory.setIsParent(false);
 			contentCategoryMapper.updateByPrimaryKeySelective(parentContentCategory);
-			
+
 			contentCategoryMapper.deleteByPrimaryKey(id);
-		}	
+		}
 		// TODO :需要加一个判断，如果删除的是父分类，需要给出解决方案：1、级联删除，2、给友情提示“只能一级一级的删除”
 		// 4、响应结果
 		return E3Result.ok();
