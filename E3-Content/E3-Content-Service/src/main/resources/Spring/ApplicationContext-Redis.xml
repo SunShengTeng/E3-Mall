@@ -44,7 +44,7 @@
 	</bean> -->
 	<!-- 连接redis单机版 -->
 	<bean id="jedisPool" class="redis.clients.jedis.JedisPool">
-		<constructor-arg name="host" value="192.168.169.162"/>
+		<constructor-arg name="host" value="192.168.169.174"/>
 		<constructor-arg name="port" value="6379"/>
 	</bean>
 	<bean id="jedisClientPool" class="cn.sst.e3mall.common.Jedis.JedisClientPool">
