@@ -13,7 +13,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 public class SolrJTest {
 	private SolrClient getHttpSolrJClient() {
 
-		ApplicationContext applicationContext = new ClassPathXmlApplicationContext("classpath:Spring/ApplicationContext-Service.xml");
+		ApplicationContext applicationContext = new ClassPathXmlApplicationContext("classpath*:Spring/ApplicationContext-*.xml");
 		return (SolrClient) applicationContext.getBean("httpSolrClient");
 	}
 
