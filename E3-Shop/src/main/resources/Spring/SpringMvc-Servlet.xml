@@ -26,7 +26,7 @@
 	
 	<!-- 引用dubbo服务 -->
 	<dubbo:application name="e3-manager-web"/>
-	<dubbo:registry protocol="zookeeper" address="192.168.169.173:2181"/>	
+	<dubbo:registry protocol="zookeeper" address="192.168.169.162:2181"/>	
     <dubbo:reference interface="cn.sst.e3mall.service.ContentService" id="contentServiceImpl"/>
     <dubbo:reference interface="cn.sst.e3mall.service.ContentCategoryService" id="contentCatagoryServiceImpl"/>
 	
