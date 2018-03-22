@@ -1,20 +1,14 @@
 package cn.sst.e3mall.search.service;
 
-import java.util.List;
+import java.io.IOException;
 
-import cn.sst.e3mall.search.pojo.ItemCategory;
+import cn.sst.e3mall.common.Utils.E3Result;
 
 public interface IItemCategory {
 
 	/**
-	 * 获取索引数据
-	 * @return
-	 */
-	public List<ItemCategory> getItemCategory();
-	
-
-	/**
 	 * 创建索引数据
+	 * @throws IOException
 	 */
-	public void createItemCategoryIndex();
+	public E3Result createItemCategoryIndex() throws IOException;
 }
