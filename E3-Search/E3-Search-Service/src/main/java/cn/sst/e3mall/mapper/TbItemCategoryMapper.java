@@ -1,30 +1,19 @@
 package cn.sst.e3mall.mapper;
 
-import cn.sst.e3mall.pojo.TbItem;
-import cn.sst.e3mall.pojo.TbItemExample;
 import java.util.List;
-import org.apache.ibatis.annotations.Param;
 
+import cn.sst.e3mall.search.pojo.ItemCategory;
+
+/**
+ * 查询商品信息，构建索引库
+ * @author sunshengteng
+ *
+ */
 public interface TbItemCategoryMapper {
-    int countByExample(TbItemExample example);
 
-    int deleteByExample(TbItemExample example);
-
-    int deleteByPrimaryKey(Long id);
-
-    int insert(TbItem record);
-
-    int insertSelective(TbItem record);
-
-    List<TbItem> selectByExample(TbItemExample example);
-
-    TbItem selectByPrimaryKey(Long id);
-
-    int updateByExampleSelective(@Param("record") TbItem record, @Param("example") TbItemExample example);
-
-    int updateByExample(@Param("record") TbItem record, @Param("example") TbItemExample example);
-
-    int updateByPrimaryKeySelective(TbItem record);
-
-    int updateByPrimaryKey(TbItem record);
+	/**
+	 * 查询商品并关联分类信息
+	 * @return
+	 */
+	public List<ItemCategory> itemLeftJoinItemCategory();
 }
