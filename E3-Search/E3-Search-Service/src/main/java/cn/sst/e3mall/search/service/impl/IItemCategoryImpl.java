@@ -1,28 +1,35 @@
 package cn.sst.e3mall.search.service.impl;
 
-
 import java.io.IOException;
 import java.util.List;
 
 import org.apache.solr.client.solrj.SolrClient;
+import org.apache.solr.client.solrj.SolrQuery;
 import org.apache.solr.common.SolrInputDocument;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import cn.sst.e3mall.common.Utils.E3Result;
+import cn.sst.e3mall.common.pojo.ItemCategory;
+import cn.sst.e3mall.common.pojo.SearchResult;
 import cn.sst.e3mall.mapper.TbItemCategoryMapper;
-import cn.sst.e3mall.search.pojo.ItemCategory;
+import cn.sst.e3mall.search.dao.ItemCategoryDao;
 import cn.sst.e3mall.search.service.IItemCategory;
+
 @Service
 public class IItemCategoryImpl implements IItemCategory {
 
-
+	@Autowired
+	private ItemCategoryDao itemCategoryDao; // 索引库Dao
 	@Autowired
 	private SolrClient httpSolrClient;
-	
+
+	@Value("${DEFAULT_FIELD}")
+	private String DEFAULT_FIELD; // 默认搜索域
 	@Autowired
-	private TbItemCategoryMapper tbItemCategoryMapper;
-	
+	private TbItemCategoryMapper tbItemCategoryMapper; // 
+
 	@Override
 	public E3Result createItemCategoryIndex() throws IOException {
 
@@ -42,7 +49,7 @@ public class IItemCategoryImpl implements IItemCategory {
 			}
 			// 提交
 			httpSolrClient.commit();
-			
+
 			// 响应前端
 			return E3Result.ok();
 		} catch (Exception e) {
@@ -51,8 +58,35 @@ public class IItemCategoryImpl implements IItemCategory {
 		} finally {
 			httpSolrClient.close();
 		}
+
+	}
+
+	@Override
+	public SearchResult searchItemList(String keywords, int page, int rows) throws Exception {
+		// 封装SolrQuery
+		SolrQuery query = new SolrQuery();
+		// 设置查询条件
+		query.setQuery(keywords);
+		// 设置分页条件
+		query.setStart((page - 1) * rows);
+		// 设置rows
+		query.setRows(rows);
+		// 设置默认搜索域
+		query.set("df", DEFAULT_FIELD);
+		// 设置高亮显示
+		query.setHighlight(true);
+		query.addHighlightField("item_title");
+		query.setHighlightSimplePre("<em style=\"color:red\">");
+		query.setHighlightSimplePost("</em>");
+		// 返回最终结果
+		SearchResult searchResult = itemCategoryDao.searchItemIndex(query);
+		// 计算总页数
+		int recourdCount = searchResult.getTotalCount();
+		int pages = recourdCount / rows;
+		if (recourdCount % rows > 0) pages++;
+		searchResult.setTotalPages(pages);
 		
-		
+		return searchResult;
 	}
 
 }

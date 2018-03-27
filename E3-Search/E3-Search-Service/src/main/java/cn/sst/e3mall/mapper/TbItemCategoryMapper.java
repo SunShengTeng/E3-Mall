@@ -2,7 +2,8 @@ package cn.sst.e3mall.mapper;
 
 import java.util.List;
 
-import cn.sst.e3mall.search.pojo.ItemCategory;
+import cn.sst.e3mall.common.pojo.ItemCategory;
+
 
 /**
  * 查询商品信息，构建索引库
