@@ -10,7 +10,7 @@
 	http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
 	
 	
-	<context:component-scan base-package="cn.sst.e3mall.search.service" />
+	<context:component-scan base-package="cn.sst.e3mall.search" />
 
 	<!-- 使用dubbo发布服务 -->
 	<!-- 提供方应用信息，用于计算依赖关系 -->
