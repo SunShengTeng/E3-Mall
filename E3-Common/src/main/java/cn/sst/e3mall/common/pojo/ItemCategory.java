@@ -127,4 +127,15 @@ public class ItemCategory  implements Serializable {
 		this.category_name = category_name;
 	}
 
+	/**
+	 * 新增返回图片数组
+	 * @return
+	 */
+	public String[] getImages() {
+		if (image != null && !"".equals(image)) {
+			String[] strings = image.split(",");
+			return strings;
+		}
+		return null;
+	}
 }
