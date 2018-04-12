@@ -1,6 +1,5 @@
 package cn.sst.e3mall.search.controller;
 
-import java.io.UnsupportedEncodingException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;

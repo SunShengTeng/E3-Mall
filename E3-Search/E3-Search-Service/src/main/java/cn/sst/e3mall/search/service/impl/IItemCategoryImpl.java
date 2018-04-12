@@ -86,6 +86,9 @@ public class IItemCategoryImpl implements IItemCategory {
 		if (recourdCount % rows > 0) pages++;
 		searchResult.setTotalPages(pages);
 		
+		// 全局异常类调试
+		// int i = 1/0;
+		
 		return searchResult;
 	}
 
