@@ -117,8 +117,8 @@ public class SolrJTest {
 		SolrClient solrClient = (SolrClient) getApplicationContext().getBean("httpSolrClient");
 		SolrInputDocument document = new SolrInputDocument();
 
-		document.addField("id", "19198719731927");
-		document.addField("item_title", "飞机杯");
+		document.addField("id", "19198719731937");
+		document.addField("item_title", "飞机杯3");
 		document.addField("item_sell_point", "进口飞机杯");
 		solrClient.add(document);
 		solrClient.commit();
