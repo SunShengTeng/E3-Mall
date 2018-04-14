@@ -6,12 +6,6 @@ import cn.sst.e3mall.pojo.TbItem;
 
 public interface ItemService {
 
-	/**
-	 * 测试SOA架构
-	 * 
-	 * @return
-	 */
-	public String testItemService();
 
 	/**
 	 * 商品列表
