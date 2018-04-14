@@ -1,4 +1,4 @@
-package cn.sst.e3mall.search.test;
+package cn.sst.e3mall.search.solr;
 
 import java.io.IOException;
 import java.util.ArrayList;

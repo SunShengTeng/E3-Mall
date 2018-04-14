@@ -3,7 +3,15 @@ package cn.sst.e3mall.service.impl;
 import java.util.Date;
 import java.util.List;
 
+import javax.annotation.Resource;
+import javax.jms.Destination;
+import javax.jms.JMSException;
+import javax.jms.Message;
+import javax.jms.Session;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jms.core.JmsTemplate;
+import org.springframework.jms.core.MessageCreator;
 import org.springframework.stereotype.Service;
 
 import com.github.pagehelper.PageHelper;
@@ -26,17 +34,20 @@ public class ItemServiceImpl implements ItemService {
 	private TbItemMapper itemMapper;
 	@Autowired
 	private TbItemDescMapper itemDescMapper;
+	
+	@Autowired
+	private JmsTemplate jmsTemplate;
+	
+	@Resource 
+	private Destination itemTopicDestination;// 商品添加话题
 
 	public ItemServiceImpl() {
 		super();
 	}
 
-	@Override
-	public String testItemService() {
-
-		return "孙大爷，你好！";
-	}
-
+	/**
+	 * 商品列表服务
+	 */
 	@Override
 	public EasyUIDataGridResult getItemList(Integer page, Integer rows) {
 		// 设置分页信息
@@ -54,7 +65,10 @@ public class ItemServiceImpl implements ItemService {
 
 		return result;
 	}
-
+	/*
+	 * 添加商品
+	 * @see cn.sst.e3mall.service.ItemService#insertItem(cn.sst.e3mall.pojo.TbItem, java.lang.String)
+	 */
 	@Override
 	public E3Result insertItem(TbItem item, String itemDesc) {
 		// 1、生成商品id
@@ -77,10 +91,21 @@ public class ItemServiceImpl implements ItemService {
 		itemDescO.setUpdated(date);
 		// 6、向商品描述表插入数据
 		itemDescMapper.insert(itemDescO);
-		// 7、E3Result.ok()
+		// 7、发送商品添加消息
+		jmsTemplate.send(itemTopicDestination, new MessageCreator() {
+			
+			@Override
+			public Message createMessage(Session session) throws JMSException {
+				// 发送商品ID
+				return session.createTextMessage(itemId+"");
+			}
+		});
+		// 8、E3Result.ok()
 		return E3Result.ok();
 	}
-
+	/**
+	 * 删除商品
+	 */
 	@Override
 	public E3Result deleteItem(String[] idStrings) {
 		for (String itemId : idStrings) {
@@ -88,4 +113,6 @@ public class ItemServiceImpl implements ItemService {
 		}
 		return E3Result.ok();
 	}
+
+
 }

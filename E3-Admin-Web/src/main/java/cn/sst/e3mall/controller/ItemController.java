@@ -24,16 +24,7 @@ public class ItemController {
 	@Autowired
 	private ItemService itemService;
 
-	/**
-	 * SOA框架整合测试
-	 * 
-	 * @return
-	 */
-	@RequestMapping("/test")
-	@ResponseBody
-	public String testItem() {
-		return itemService.testItemService();
-	}
+
 
 	/**
 	 * 查询你商品列表

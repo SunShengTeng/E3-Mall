@@ -25,5 +25,11 @@ public interface IItemCategory {
 	 * @throws Exception 
 	 */
 	public SearchResult searchItemList(String keywords, int page, int rows) throws Exception;
+	/**
+	 * 根据商品消息ID添加商品索引
+	 * @param itemId
+	 * @return
+	 */
+	public E3Result insertIndexCategoryIndex(Long itemId)throws Exception;
 	
 }
