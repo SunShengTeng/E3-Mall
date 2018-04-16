@@ -22,9 +22,11 @@ import cn.sst.e3mall.common.Utils.E3Result;
 import cn.sst.e3mall.common.Utils.IDUtils;
 import cn.sst.e3mall.mapper.TbItemDescMapper;
 import cn.sst.e3mall.mapper.TbItemMapper;
+import cn.sst.e3mall.pojo.Item;
 import cn.sst.e3mall.pojo.TbItem;
 import cn.sst.e3mall.pojo.TbItemDesc;
 import cn.sst.e3mall.pojo.TbItemExample;
+import cn.sst.e3mall.pojo.TbItemExample.Criteria;
 import cn.sst.e3mall.service.ItemService;
 
 @Service
@@ -34,11 +36,11 @@ public class ItemServiceImpl implements ItemService {
 	private TbItemMapper itemMapper;
 	@Autowired
 	private TbItemDescMapper itemDescMapper;
-	
+
 	@Autowired
 	private JmsTemplate jmsTemplate;
-	
-	@Resource 
+
+	@Resource
 	private Destination itemTopicDestination;// 商品添加话题
 
 	public ItemServiceImpl() {
@@ -65,9 +67,13 @@ public class ItemServiceImpl implements ItemService {
 
 		return result;
 	}
+
 	/*
 	 * 添加商品
-	 * @see cn.sst.e3mall.service.ItemService#insertItem(cn.sst.e3mall.pojo.TbItem, java.lang.String)
+	 * 
+	 * @see
+	 * cn.sst.e3mall.service.ItemService#insertItem(cn.sst.e3mall.pojo.TbItem,
+	 * java.lang.String)
 	 */
 	@Override
 	public E3Result insertItem(TbItem item, String itemDesc) {
@@ -93,16 +99,17 @@ public class ItemServiceImpl implements ItemService {
 		itemDescMapper.insert(itemDescO);
 		// 7、发送商品添加消息
 		jmsTemplate.send(itemTopicDestination, new MessageCreator() {
-			
+
 			@Override
 			public Message createMessage(Session session) throws JMSException {
 				// 发送商品ID
-				return session.createTextMessage(itemId+"");
+				return session.createTextMessage(itemId + "");
 			}
 		});
 		// 8、E3Result.ok()
 		return E3Result.ok();
 	}
+
 	/**
 	 * 删除商品
 	 */
@@ -114,5 +121,22 @@ public class ItemServiceImpl implements ItemService {
 		return E3Result.ok();
 	}
 
+	@Override
+	public TbItem getTbItemById(Long itemId) {
+		TbItemExample tbItemExample = new TbItemExample();
+		Criteria criteria = tbItemExample.createCriteria();
+		criteria.andIdEqualTo(itemId);
+		List<TbItem> items = itemMapper.selectByExample(tbItemExample);
+		if (items != null && items.size() > 0) {
+			Item item = new Item(items.get(0));
+			return item;
+		}
+		return null;
+	}
+
+	@Override
+	public TbItemDesc getTbItemDescById(long itemId) {
+		return itemDescMapper.selectByPrimaryKey(itemId);
+	}
 
 }
