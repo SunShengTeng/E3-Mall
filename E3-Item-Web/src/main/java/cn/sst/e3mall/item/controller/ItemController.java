@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import cn.sst.e3mall.item.pojo.Item;
 import cn.sst.e3mall.pojo.TbItem;
 import cn.sst.e3mall.pojo.TbItemDesc;
 import cn.sst.e3mall.service.ItemService;
@@ -20,7 +21,8 @@ public class ItemController {
 	
 	@RequestMapping("/{itemId}")
 	public String getItemAndItemDescById(@PathVariable long itemId,Model model){
-		TbItem item = itemService.getTbItemById(itemId);
+		TbItem tbItem = itemService.getTbItemById(itemId);
+		Item item = new Item(tbItem);
 		TbItemDesc itemDesc = itemService.getTbItemDescById(itemId);
 		model.addAttribute("item", item);
 		model.addAttribute("itemDesc", itemDesc);

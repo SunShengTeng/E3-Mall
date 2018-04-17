@@ -9,7 +9,7 @@
 <!-- 	<context:property-placeholder location="classpath:Config/resource.properties" /> -->
 
 	<!-- 集群版的配置 -->
-	<!-- <bean id="jedisCluster" class="redis.clients.jedis.JedisCluster">
+	<bean id="jedisCluster" class="redis.clients.jedis.JedisCluster">
 		<constructor-arg>
 			<set>
 				<bean class="redis.clients.jedis.HostAndPort">
@@ -41,13 +41,13 @@
 	</bean>
 	<bean id="jedisClientCluster" class="cn.sst.e3mall.common.Jedis.JedisClientCluster">
 		<property name="jedisCluster" ref="jedisCluster"/>
-	</bean> -->
+	</bean>
 	<!-- 连接redis单机版 -->
-	<bean id="jedisPool" class="redis.clients.jedis.JedisPool">
+	<!-- <bean id="jedisPool" class="redis.clients.jedis.JedisPool">
 		<constructor-arg name="host" value="192.168.169.161"/>
 		<constructor-arg name="port" value="6379"/>
 	</bean>
 	<bean id="jedisClientPool" class="cn.sst.e3mall.common.Jedis.JedisClientPool">
 		<property name="jedisPool" ref="jedisPool"></property>
-	</bean>
+	</bean> -->
 </beans>

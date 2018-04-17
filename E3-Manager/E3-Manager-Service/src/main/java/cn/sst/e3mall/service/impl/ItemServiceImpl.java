@@ -128,8 +128,7 @@ public class ItemServiceImpl implements ItemService {
 		criteria.andIdEqualTo(itemId);
 		List<TbItem> items = itemMapper.selectByExample(tbItemExample);
 		if (items != null && items.size() > 0) {
-			Item item = new Item(items.get(0));
-			return item;
+			return items.get(0);
 		}
 		return null;
 	}
