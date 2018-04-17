@@ -6,7 +6,7 @@
 	http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.2.xsd">
 	<!-- 加载资源文件(备注：由于在项目的整个spring容器中只能有一个context:property-placeholder元素，所以此处的配置会跟其他的冲突
 	      故此暂时将两个资源文件合并为一个，所有的内容都放在一起存放) -->
-<!-- 	<context:property-placeholder location="classpath:Config/resource.properties" /> -->
+ 	<!-- <context:property-placeholder location="classpath:Config/resource.properties" /> -->
 
 	<!-- 集群版的配置 -->
 	<bean id="jedisCluster" class="redis.clients.jedis.JedisCluster">
