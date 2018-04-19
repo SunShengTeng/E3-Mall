@@ -20,7 +20,7 @@ public class ItemController {
 	private ItemService itemService;
 	
 	@RequestMapping("/{itemId}")
-	public String getItemAndItemDescById(@PathVariable long itemId,Model model){
+	public String getItemAndItemDescById(@PathVariable long itemId,Model model) throws Exception{
 		TbItem tbItem = itemService.getTbItemById(itemId);
 		Item item = new Item(tbItem);
 		TbItemDesc itemDesc = itemService.getTbItemDescById(itemId);
