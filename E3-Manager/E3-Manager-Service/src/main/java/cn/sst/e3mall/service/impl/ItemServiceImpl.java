@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.jms.core.JmsTemplate;
 import org.springframework.jms.core.MessageCreator;
 import org.springframework.stereotype.Service;
+import org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
@@ -42,12 +43,15 @@ public class ItemServiceImpl implements ItemService {
 	private TbItemDescMapper itemDescMapper;
 	@Resource
 	private Destination itemTopicDestination;// 商品添加话题
+	
 	// ActiveMQ
 	@Autowired
 	private JmsTemplate jmsTemplate;
 	// Redis
 	@Autowired
 	private JedisClient jedisClientCluster;
+
+	
 	@Value("${ITEM_INFO_PREF}")
 	private String ITEM_INFO_PREF;
 	@Value("${CACHE_EXPIRE}")
