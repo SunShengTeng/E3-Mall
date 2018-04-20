@@ -88,6 +88,17 @@
 			<artifactId>freemarker-gae</artifactId>
 			<version>2.3.18</version>
 		</dependency>
+		<!-- 单元测试 -->
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<!-- ActiveMQ -->
+		<dependency>
+			<groupId>org.apache.activemq</groupId>
+			<artifactId>activemq-all</artifactId>
+		</dependency>
 	</dependencies>
 	<build>
 		<!-- 配置tomcat插件 -->
