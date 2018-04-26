@@ -15,6 +15,10 @@
 <script type="text/javascript" src="/js/passport.common.js?v20140531"></script>
 <script type="text/javascript" src="/js/jquery.alerts.js"></script>
 <script type="text/javascript" src="/js/png.js?v20140521"></script>
+
+<link rel="stylesheet" type="text/css" href="/css/reg.css?v20140432" />
+<script type="text/javascript" src="/js/allMail.js"></script>
+<script type="text/javascript" src="/js/reg.js"></script>
 </head>
 <body>
 		<!-- header -->
@@ -23,9 +27,7 @@
 		</div>
 
 		<!--mainStart-->
-						<link rel="stylesheet" type="text/css" href="/css/reg.css?v20140432" />
-<script type="text/javascript" src="/js/allMail.js?v20140430"></script>
-<script type="text/javascript" src="/js/reg.js?v20150122"></script>
+
 <!-- reg_main -->
 <div class="tabBox clear">
     <span class="reg_hide reg_show regMr5" id="regper">个人用户</span>
@@ -141,7 +143,7 @@
 		},
 		beforeSubmit:function() {
 				//检查用户是否已经被占用
-				$.ajax({
+				/*$.ajax({
 	             	url : REGISTER.param.surl + "/user/check/"+escape($("#regName").val())+"/1?r=" + Math.random(),
 	             	success : function(data) {
 	            		if (data.data) {
@@ -158,20 +160,37 @@
 	            			});
 	            		} else {
 	            			showError("regName","userMamErr",defaultArr[10]);
+	            		}	
+	            	}    	
+				});*/
+				var param = {username:$("#regName").val()};
+				$.post("/user/check/username/4?r=" + Math.random(),param, function(data){
+					if (data.data) {
+	            			//检查手机号是否存在
+	            			$.ajax({
+	            				url : REGISTER.param.surl + "/user/check/"+$("#phone").val()+"/2?r=" + Math.random(),
+				            	success : function(data) {
+				            		if (data.data) {
+					            		REGISTER.doSubmit();
+				            		} else {
+				            			showError("phone","phoneErr",defaultArr[9]);
+				            		}
+				            	}
+	            			});
+	            		} else {
+	            			showError("regName","userMamErr",defaultArr[10]);
 	            		}
-	            	}	
+	            	});	
 		},
-		doSubmit:function(){
+		doSubmit:function() {
 			$.post("/user/register",$("#regForm_mod").serialize(), function(data){
-				
-				if (data.status == 200) {
+				if(data.status == 200){
 					jAlert('用户注册成功，请登录！',"提示", function(){
 						REGISTER.login();
-					};
+					});
 				} else {
 					jAlert("注册失败！","提示");
-				};
-			
+				}
 			});
 		},
 		login:function() {
