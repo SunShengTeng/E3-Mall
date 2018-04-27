@@ -11,4 +11,11 @@ public interface CheckService {
 	 * @return
 	 */
 	E3Result checkUserIsExist(String checkData,Integer type);
+	/**
+	 * 校验登陆状态
+	 * @param token
+	 * @return
+	 */
+	E3Result checkUserIsLogin(String token);
+	
 }

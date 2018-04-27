@@ -3,6 +3,7 @@ package cn.sst.e3mall.sso.service.impl;
 import java.util.List;
 import java.util.UUID;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -50,6 +51,18 @@ public class LoginServiceImpl implements LoginService {
 		jedisCluster.expire("SESSION:"+token, SESSION_EXPIRE);// 设置session过期时间
 		// 4、封装结果集
 		return E3Result.ok(token);
+	}
+
+	@Override
+	public void logout(String token) {
+		// 删除redis中的key
+		if (StringUtils.isNotBlank(token)) {
+			try {
+				jedisCluster.del("SESSION:"+token);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
 	}
 
 }

@@ -6,7 +6,9 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import cn.sst.e3mall.common.Jedis.JedisClient;
 import cn.sst.e3mall.common.Utils.E3Result;
+import cn.sst.e3mall.common.Utils.JsonUtils;
 import cn.sst.e3mall.mapper.TbUserMapper;
 import cn.sst.e3mall.pojo.TbUser;
 import cn.sst.e3mall.pojo.TbUserExample;
@@ -18,6 +20,9 @@ public class CheckServiceImpl implements CheckService {
 
 	@Autowired
 	private TbUserMapper tbUserMapper;
+	
+	@Autowired
+	private JedisClient jedisCluster;
 	
 	@Override
 	public E3Result checkUserIsExist(String checkData, Integer type) {
@@ -40,6 +45,16 @@ public class CheckServiceImpl implements CheckService {
 			return E3Result.ok(false);
 		}
 		return E3Result.ok(true);
+	}
+
+	@Override
+	public E3Result checkUserIsLogin(String token) {
+		String user = jedisCluster.get("SESSION:"+token);
+		if (StringUtils.isBlank(user)) {
+			return E3Result.build(400, "登陆已过期");
+		}
+		TbUser tbUser = JsonUtils.jsonToPojo(user, TbUser.class);
+		return E3Result.ok(tbUser);
 	}
 
 }

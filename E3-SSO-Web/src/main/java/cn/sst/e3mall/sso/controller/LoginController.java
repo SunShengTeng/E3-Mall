@@ -42,4 +42,17 @@ public class LoginController {
 		}
 		return result;
 	}
+	
+	@RequestMapping("/user/logout")
+	public String logout(HttpServletRequest request) {
+		//TODO
+		// 1、删除redis中的token
+		try {
+			String token = CookieUtils.getCookieValue(request, "token");
+			loginService.logout(token);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return "login";
+	}
 }
