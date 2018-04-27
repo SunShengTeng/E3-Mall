@@ -87,4 +87,11 @@ public class JedisClientPool implements JedisClient{
 		return result;
 	}
 
+	@Override
+	public void del(String key) {
+		Jedis jedis = jedisPool.getResource();
+		jedis.del(key);
+		jedis.close();
+	}
+
 }

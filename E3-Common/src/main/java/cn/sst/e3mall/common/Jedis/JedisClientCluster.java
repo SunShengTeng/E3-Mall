@@ -1,5 +1,7 @@
 package cn.sst.e3mall.common.Jedis;
 
+import org.quartz.simpl.LoadingLoaderClassLoadHelper;
+
 import redis.clients.jedis.JedisCluster;
 
 public class JedisClientCluster implements JedisClient {
@@ -57,6 +59,10 @@ public class JedisClientCluster implements JedisClient {
 	@Override
 	public Long hdel(String key, String... field) {
 		return jedisCluster.hdel(key, field);
+	}
+	@Override
+	public void del(String key){
+		jedisCluster.del(key);
 	}
 
 }
