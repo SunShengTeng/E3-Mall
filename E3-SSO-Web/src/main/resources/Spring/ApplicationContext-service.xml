@@ -16,4 +16,5 @@
 	<!-- 引用服务 -->
 	<dubbo:reference interface="cn.sst.e3mall.sso.service.CheckService" id="checkService" />
 	<dubbo:reference interface="cn.sst.e3mall.sso.service.RegisterService" id="registerService" />
+	<dubbo:reference interface="cn.sst.e3mall.sso.service.LoginService" id="loginService" />
 </beans>

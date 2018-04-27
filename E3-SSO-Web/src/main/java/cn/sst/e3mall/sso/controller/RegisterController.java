@@ -16,11 +16,6 @@ public class RegisterController {
 	@Autowired
 	private RegisterService registerService;
 	
-	@RequestMapping("/page/register")
-	public String pageController(){
-		return "register";
-	}
-	
 	/**
 	 * 注册用户
 	 * @param user
