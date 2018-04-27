@@ -16,7 +16,6 @@ import cn.sst.e3mall.common.Utils.E3Result;
 import cn.sst.e3mall.sso.service.CheckService;
 
 @Controller
-@RequestMapping("/user")
 public class CheckController {
 
 	@Autowired
@@ -45,7 +44,7 @@ public class CheckController {
 		// 1、校验登陆状态
 		E3Result e3Result = checkService.checkUserIsLogin(token);
 		// 2、检查是否是jsonp请求
-		if (StringUtils.isBlank(callback)) {
+		if (!StringUtils.isBlank(callback)) {
 			//把结果封装成一个js语句响应
 			MappingJacksonValue mappingJacksonValue = new MappingJacksonValue(e3Result);
 			mappingJacksonValue.setJsonpFunction(callback);
