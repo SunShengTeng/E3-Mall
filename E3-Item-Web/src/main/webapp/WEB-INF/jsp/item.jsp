@@ -51,7 +51,7 @@
 <script type="text/javascript" src="/js/shadow.js?v=20160416"></script>
 <script src="/js/product.js" type="text/javascript"></script>
 <link rel="stylesheet" type="text/css" href="/css/base_w1200.css">
-<link rel="stylesheet" type="text/css" href="/css/product.css">
+<link rel="stylesheet" type="text/css" href="/css/product.css?v=20180429">
 <link rel="stylesheet" type="text/css" href="/css/jquery.alerts.css" />
 <link rel="stylesheet" type="text/css" href="/css/common.css" />
 </head>

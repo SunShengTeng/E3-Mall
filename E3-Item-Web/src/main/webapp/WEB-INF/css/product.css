@@ -62,7 +62,7 @@ input.border{border:1px solid #c9c9c9}
 .pItemsMain{float:right;width:568px;}
 .pItemsSide{float:right;width:222px;overflow:hidden;background-color:#ffffff;position:relative;z-index:1;}
 .pItemsName{}
-.pItemsName .cm{padding:0 15px;margin:10px 0;height:60px;overflow:hidden;zoom:1;}
+.pItemsName .cm{padding:10px 15px;margin:10px 0;height:60px;overflow:hidden;zoom:1;}
 .pItemsName h1,.pItemsName strong{font-size:18px;font-family:微软雅黑;line-height:30px;}
 .pItemsName h1{float:left;color:#191c1f;}
 .pItemsName h1 a:link,.pItemsName h1 a:visited,.pItemsName h1 a:hover{color:#191c1f;text-decoration:none;cursor:text;}

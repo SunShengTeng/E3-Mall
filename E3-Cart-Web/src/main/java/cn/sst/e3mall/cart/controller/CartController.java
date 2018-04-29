@@ -31,8 +31,8 @@ public class CartController {
 	private String COOKNAME_CART;
 
 	@RequestMapping("/cart/add/{itemId}")
-	public String addCart(@PathVariable Long itemId, int num, HttpServletRequest request,
-			HttpServletResponse response) throws Exception{
+	public String addCart(@PathVariable Long itemId, int num, HttpServletRequest request, HttpServletResponse response)
+			throws Exception {
 		// 未登陆状态（写入前端缓存）
 		// 1、取购物车列表
 		List<TbItem> itemList = getCartItemList(request);
@@ -67,30 +67,35 @@ public class CartController {
 
 	/**
 	 * 购物车列表
+	 * 
 	 * @param request
 	 * @param model
 	 * @return
 	 */
 	@RequestMapping("/cart/cart")
-	public String cartList(HttpServletRequest request,Model model) throws Exception{
+	public String cartList(HttpServletRequest request, Model model) throws Exception {
 		// 1、登陆状态
 		// 2、未登陆状态
 		List<TbItem> itemList = getCartItemList(request);
 		model.addAttribute("cartList", itemList);
 		return "cart";
 	}
+
 	/**
 	 * 更新购物车内商品的购买数量
+	 * 
 	 * @param request
 	 * @param response
 	 * @param itemId
-	 * @param num 购买的商品总数
+	 * @param num
+	 *            购买的商品总数
 	 * @return
 	 * @throws Exception
 	 */
 	@RequestMapping("/cart/update/num/{itemId}/{num}")
 	@ResponseBody
-	public E3Result increItemNumber(HttpServletRequest request, HttpServletResponse response,@PathVariable Long itemId,@PathVariable int num) throws Exception{
+	public E3Result increItemNumber(HttpServletRequest request, HttpServletResponse response, @PathVariable Long itemId,
+			@PathVariable int num) throws Exception {
 		// 修改购物车商品数量
 		List<TbItem> itemList = getCartItemList(request);
 		for (TbItem tbItem : itemList) {
@@ -102,6 +107,31 @@ public class CartController {
 		CookieUtils.setCookie(request, response, COOKNAME_CART, JsonUtils.objectToJson(itemList), true);
 		return E3Result.ok();
 	}
+	/**
+	 * 从购物车中删除商品
+	 * @param itemId
+	 * @param request
+	 * @param response
+	 * @return
+	 * @throws Exception
+	 */
+	@RequestMapping("/cart/delete/{itemId}")
+	public String deleteItemAtCartByItemId(@PathVariable Long itemId, HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
+		// 获取购物车列表
+		List<TbItem> itemList = getCartItemList(request);
+		// 从购物车删除商品
+		for (TbItem tbItem : itemList) {
+			if (tbItem.getId().longValue() == itemId) {
+				itemList.remove(tbItem);
+				break;
+			}
+		}
+		// 向缓存中写入删除后的商品列表
+		CookieUtils.setCookie(request, response, COOKNAME_CART, JsonUtils.objectToJson(itemList), true);
+		return "redirect:/cart/cart";
+	}
+
 	/**
 	 * 从Cookie中取购物车列表
 	 * 
