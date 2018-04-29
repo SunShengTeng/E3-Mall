@@ -66,7 +66,7 @@
 						<div class="pItem pGoods">
 							<div class="cart_pimg">
 								<a target="_blank" title="${cart.title }" href="http://localhost:8086/item/${cart.id }.html">
-								<img src="${cart.images[0] }" style="width: 60px;height: 60px;"/>
+								<img src="${cart.image }" style="width: 60px;height: 60px;"/>
 								</a>
 							</div>
 							<div class="cart_pname">
@@ -91,7 +91,7 @@
 						</div>
 						<div class="pItem pWeight">0.05kg<br></div>
 						<div class="pItem pSubtotal">
-							<span id="total_price" class="totalprice">¥<fmt:formatNumber groupingUsed="false" value="${cart.price / 100 * cart.num}" maxFractionDigits="2" minFractionDigits="2"/></span>
+							<span id="total_price" class="totalprice" itemId="${cart.id}">¥<fmt:formatNumber groupingUsed="false" value="${cart.price / 100 * cart.num}" maxFractionDigits="2" minFractionDigits="2"/></span>
 						</div>
 						<div class="pItem pInventory">现货</div>
 						<div class="pItem pOperator">
@@ -117,7 +117,7 @@
         </div>
       </div>
       <div class="cartJsuan">
-         <input onclick="javascript:document.location.href='http://localhost:8082'" class="goshop" value="继续购物" type="button">
+         <input onclick="javascript:document.location.href='http://localhost:8081/index'" class="goshop" value="继续购物" type="button">
          <input onclick="javascript:document.location.href='http://localhost:8091/order/order-cart.html'" class="jiesuan youxuan" value="去结算" type="button">
       </div>
     </div>

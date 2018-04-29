@@ -14,6 +14,5 @@
 	<dubbo:application name="e3-cart-web"/>
 	<dubbo:registry protocol="zookeeper" address="192.168.169.162:2181"/>	
 	<!-- 引用服务 -->
-	<!-- <dubbo:reference interface="cn.sst.e3mall.sso.service.CheckService" id="checkService" /> -->
-	
+	<dubbo:reference interface="cn.sst.e3mall.service.ItemService" id="itemService" />
 </beans>
