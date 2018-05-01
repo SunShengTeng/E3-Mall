@@ -81,6 +81,7 @@
 			<artifactId>junit</artifactId>
 			<scope>test</scope>
 		</dependency>
+
 		<dependency>
 			<groupId>cn.sst</groupId>
 			<artifactId>E3-SSO-Interface</artifactId>
