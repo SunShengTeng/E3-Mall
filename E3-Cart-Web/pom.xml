@@ -91,6 +91,11 @@
 			<artifactId>E3-Manager-Interface</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
+		<dependency>
+			<groupId>cn.sst</groupId>
+			<artifactId>E3-SSO-Interface</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
   </dependencies>
 	<build>
 		<!-- 配置tomcat插件 -->

@@ -23,4 +23,11 @@
 	</bean>
 	<!-- 全局异常处理类 -->
 	<bean class="cn.sst.e3mall.cart.exception.CartGlobalExcetionHandler"/>
+	<!-- 配置拦截器 -->
+	<mvc:interceptors>
+		<mvc:interceptor>
+		  <mvc:mapping path="/**"/>
+		  <bean class="cn.sst.e3mall.cart.interceptor.LoginInterceptor"></bean>
+		</mvc:interceptor>
+	</mvc:interceptors>
 </beans>

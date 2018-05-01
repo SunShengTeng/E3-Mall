@@ -1,6 +1,7 @@
 package cn.sst.e3mall.common.Jedis;
 
-import org.quartz.simpl.LoadingLoaderClassLoadHelper;
+
+import java.util.List;
 
 import redis.clients.jedis.JedisCluster;
 
@@ -63,6 +64,18 @@ public class JedisClientCluster implements JedisClient {
 	@Override
 	public void del(String key){
 		jedisCluster.del(key);
+	}
+
+	@Override
+	public Boolean hexists(String key, String field){
+		Boolean hexists = jedisCluster.hexists(key, field);
+		return hexists;
+	}
+
+	@Override
+	public List<String> hvals(String key) {
+		List<String> list = jedisCluster.hvals(key);
+		return list;
 	}
 
 }
