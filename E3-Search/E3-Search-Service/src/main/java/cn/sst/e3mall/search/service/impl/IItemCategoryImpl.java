@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.apache.solr.client.solrj.SolrClient;
 import org.apache.solr.client.solrj.SolrQuery;
+import org.apache.solr.client.solrj.SolrServerException;
 import org.apache.solr.common.SolrInputDocument;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -28,7 +29,7 @@ public class IItemCategoryImpl implements IItemCategory {
 	@Value("${DEFAULT_FIELD}")
 	private String DEFAULT_FIELD; // 默认搜索域
 	@Autowired
-	private TbItemCategoryMapper tbItemCategoryMapper; // 
+	private TbItemCategoryMapper tbItemCategoryMapper; //
 
 	@Override
 	public E3Result createItemCategoryIndex() throws IOException {
@@ -83,10 +84,34 @@ public class IItemCategoryImpl implements IItemCategory {
 		// 计算总页数
 		int recourdCount = searchResult.getTotalCount();
 		int pages = recourdCount / rows;
-		if (recourdCount % rows > 0) pages++;
+		if (recourdCount % rows > 0)
+			pages++;
 		searchResult.setTotalPages(pages);
-		
+
+		// 全局异常类调试
+		// int i = 1/0;
+
 		return searchResult;
+	}
+
+	@Override
+	public E3Result insertIndexCategoryIndex(Long itemId) throws Exception {
+		// 1、根据商品ID查询商品索引数据
+		ItemCategory itemCategory = tbItemCategoryMapper.getItemById(itemId);
+		// 2、创建一SolrInputDocument对象。
+		SolrInputDocument document = new SolrInputDocument();
+		// 3、使用SolrServer对象写入索引库。
+		document.addField("id", itemCategory.getId());
+		document.addField("item_title", itemCategory.getTitle());
+		document.addField("item_sell_point", itemCategory.getSellPoint());
+		document.addField("item_price", itemCategory.getPrice());
+		document.addField("item_image", itemCategory.getImage());
+		document.addField("item_category_name", itemCategory.getCategory_name());
+		// 5、向索引库中添加文档。
+		httpSolrClient.add(document);
+		httpSolrClient.commit();
+		// 4、返回成功，返回e3Result。
+		return E3Result.ok();
 	}
 
 }

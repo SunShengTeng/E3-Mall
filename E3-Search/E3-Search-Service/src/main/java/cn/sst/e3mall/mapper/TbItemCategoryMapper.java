@@ -17,4 +17,10 @@ public interface TbItemCategoryMapper {
 	 * @return
 	 */
 	public List<ItemCategory> itemLeftJoinItemCategory();
+	/**
+	 * 根据商品ID查询商品索引需要的数据
+	 * @param itemId
+	 * @return
+	 */
+	public ItemCategory getItemById(Long itemId);
 }

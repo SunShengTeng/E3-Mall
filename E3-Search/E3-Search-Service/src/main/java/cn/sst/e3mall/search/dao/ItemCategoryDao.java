@@ -39,7 +39,7 @@ public class ItemCategoryDao {
 			ItemCategory itemCategory = new ItemCategory();
 			//取商品信息
 			itemCategory.setCategory_name((String) solrDocument.get("item_category_name"));
-			itemCategory.setId(itemCategory.getId());;
+			itemCategory.setId((String)solrDocument.get("id"));;
 			itemCategory.setImage((String) solrDocument.get("item_image"));
 			itemCategory.setPrice((float) solrDocument.get("item_price"));
 			itemCategory.setSellPoint((String) solrDocument.get("item_sell_point"));

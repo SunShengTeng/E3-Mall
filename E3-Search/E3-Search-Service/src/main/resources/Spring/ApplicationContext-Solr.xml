@@ -9,14 +9,18 @@
 	http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.2.xsd
 	http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
 
-
-	<bean id="httpSolrClient" class="org.apache.solr.client.solrj.impl.HttpSolrClient">
+	<!-- 单机版 -->
+	<!-- <bean id="httpSolrClient" class="org.apache.solr.client.solrj.impl.HttpSolrClient">
 		<constructor-arg index="0"
 			value="http://192.168.169.160:8080/solr/Core01" />
-		<!-- 设置响应解析器 -->
-		<!-- <property name="parser"> <bean class="org.apache.solr.client.solrj.impl.XMLResponseParser"/> 
-			</property> -->
-		<!-- 建立连接的最长时间 -->
 		<property name="connectionTimeout" value="3000" />
+	</bean> -->
+
+	<!-- 集群版 -->
+	<bean id="httpSolrClient" class="cn.sst.e3mall.search.util.E3MallCloudSolrClient">
+	<constructor-arg index="0" value="e3mall"></constructor-arg>
+	<constructor-arg index="1" value="192.168.169.162:2181"></constructor-arg>
+	<constructor-arg index="2" value="192.168.169.162:2182"></constructor-arg>
+	<constructor-arg index="3" value="192.168.169.162:2183"></constructor-arg>
 	</bean>
 </beans>

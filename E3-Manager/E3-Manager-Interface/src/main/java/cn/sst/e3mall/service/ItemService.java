@@ -3,15 +3,10 @@ package cn.sst.e3mall.service;
 import cn.sst.e3mall.common.Results.EasyUIDataGridResult;
 import cn.sst.e3mall.common.Utils.E3Result;
 import cn.sst.e3mall.pojo.TbItem;
+import cn.sst.e3mall.pojo.TbItemDesc;
 
 public interface ItemService {
 
-	/**
-	 * 测试SOA架构
-	 * 
-	 * @return
-	 */
-	public String testItemService();
 
 	/**
 	 * 商品列表
@@ -37,5 +32,18 @@ public interface ItemService {
 	 * @return
 	 */
 	E3Result deleteItem(String[] idStrings);
+	/**
+	 * 根据商品ID获取商品
+	 * @param itemId
+	 * @return
+	 */
+	TbItem getTbItemById(Long itemId);
+	/**
+	 * 根据商品ID，获取商品描述
+	 * @param itemId
+	 * @return
+	 */
+	TbItemDesc getTbItemDescById(long itemId);
+
 
 }
