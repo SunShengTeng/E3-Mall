@@ -1,6 +1,7 @@
 package cn.sst.e3mall.sso.controller;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
@@ -12,7 +13,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class PageController {
 
 	@RequestMapping("/page/login")
-	public String loginPageController(){
+	public String loginPageController(String redirectUrl,Model model){
+		model.addAttribute("redirectUrl", redirectUrl);
 		return "login";
 	}
 	

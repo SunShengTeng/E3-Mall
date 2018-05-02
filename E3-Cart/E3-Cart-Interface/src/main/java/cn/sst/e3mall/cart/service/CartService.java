@@ -41,4 +41,10 @@ public interface CartService {
 	 * @return
 	 */
 	List<TbItem> mergeCartList(List<TbItem> cookieCartList,Long userId);
+	/**
+	 * 创建订单以后清空购物车
+	 * @param userId
+	 * @return
+	 */
+	E3Result deleteCart(Long userId);
 }
