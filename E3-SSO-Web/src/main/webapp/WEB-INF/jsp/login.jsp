@@ -116,7 +116,7 @@
 	</div>
 	<!-- /footer -->
 	<script type="text/javascript">
-	var redirectUrl = "${redirect}";
+	var redirectUrl = "${redirectUrl}";
 	var LOGIN = {
 			checkInput:function() {
 				$("#sfbestNameErr").attr("class", "").html("").prev().attr("class", "border");

@@ -118,7 +118,7 @@
       </div>
       <div class="cartJsuan">
          <input onclick="javascript:document.location.href='http://localhost:8081/index'" class="goshop" value="继续购物" type="button">
-         <input onclick="javascript:document.location.href='http://localhost:8091/order/order-cart.html'" class="jiesuan youxuan" value="去结算" type="button">
+         <input onclick="javascript:document.location.href='http://localhost:8086/order/order-cart.html'" class="jiesuan youxuan" value="去结算" type="button">
       </div>
     </div>
 </div>

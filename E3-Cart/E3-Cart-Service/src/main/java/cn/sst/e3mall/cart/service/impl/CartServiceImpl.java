@@ -92,12 +92,17 @@ public class CartServiceImpl implements CartService {
 
 	@Override
 	public List<TbItem> mergeCartList(List<TbItem> cookieCartList, Long userId) {
-		System.out.println(cookieCartList);
 		// 将前端缓存的购物车合并到服务端
 		for (TbItem tbItem : cookieCartList) {
 			addCart(userId, tbItem.getId(), tbItem.getNum());
 		}
 		return getCartList(userId);
+	}
+
+	@Override
+	public E3Result deleteCart(Long userId) {
+		jedisClient.del(REDISNAME_CART + userId);
+		return E3Result.ok();
 	}
 
 }
