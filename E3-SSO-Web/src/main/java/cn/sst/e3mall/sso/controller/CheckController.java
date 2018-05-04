@@ -28,7 +28,7 @@ public class CheckController {
 	 * @param type
 	 * @return
 	 */
-	@RequestMapping(value = "/check/{checkData}/{type}")
+	@RequestMapping(value = "/user/check/{checkData}/{type}")
 	@ResponseBody
 	public E3Result checkUserIsExist(@PathVariable String checkData, @PathVariable Integer type, String username) {
 		if (type == 4) {
