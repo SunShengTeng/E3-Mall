@@ -138,7 +138,7 @@
 					if (data.status == 200) {
 						jAlert('登录成功！',"提示", function(){
 							if (redirectUrl == "") {
-								location.href = "http://localhost:8081/index";
+								location.href = "http://www.e3mall.com/index";
 							} else {
 								location.href = redirectUrl;
 							}

@@ -54,7 +54,7 @@
 							<div class="l-wrap">
 								<div class="pic">
 									<a class="trackref"
-										href="http://localhost:8083/item/${item.id}.html" title=""
+										href="http://item.e3mall.com/item/${item.id}.html" title=""
 										target="_blank"> <img src="${item.images[0]}"
 										style="display: inline" />
 									</a>
@@ -67,12 +67,12 @@
 								</div>
 								<div class="title-a">
 									<a class="trackref presaleSign_225865"
-										href="http://localhost:8086/item/${item.id}.html"
+										href="http://item.e3mall.com/item/${item.id}.html"
 										target="_blank">${item.title }</a>
 								</div>
 								<div class="title-b" style="">
 									<a class="trackref"
-										href="http://localhost:8086/item/${item.id}.html"
+										href="http://item.e3mall.com/item/${item.id}.html"
 										target="_blank">${sell_point }</a>
 								</div>
 								<div class="comment">

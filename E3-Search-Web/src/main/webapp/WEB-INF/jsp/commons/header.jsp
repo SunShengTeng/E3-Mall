@@ -14,7 +14,7 @@
 		</div>
 		<div class="index_promo"></div>
 		<div class="search">
-			<form action="http://localhost:8082/search.html" id="searchForm"
+			<form action="http://search.e3mall.com/search.html" id="searchForm"
 				name="query" method="GET">
 				<input type="text" class="text keyword ac_input" name="keyword"
 					id="keyword" value="${query }" style="color: rgb(153, 153, 153);"
@@ -44,7 +44,7 @@
 			</div>
 		</div>
 		<div class="shopingcar" id="topCart">
-			<s class="setCart"></s><a href="http://localhost:8085/cart/cart" class="t"
+			<s class="setCart"></s><a href="http://cart.e3mall.com/cart/cart" class="t"
 				rel="nofollow">我的购物车</a><b id="cartNum">0</b> <span class="outline"></span>
 			<span class="blank"></span>
 			<div id="cart_lists">
