@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
@@ -27,6 +28,8 @@ import cn.sst.e3mall.service.ItemService;
 @Controller
 public class CartController {
 
+	private static Logger logger = Logger.getLogger(CartController.class);
+	
 	@Autowired
 	private ItemService itemService;
 
@@ -75,6 +78,7 @@ public class CartController {
 			// 添加购物车
 			itemList.add(tbItem);
 		}
+		logger.debug(CartController.class.getName()+"CookieName:" + COOKNAME_CART);
 		// 3、写入缓存
 		CookieUtils.setCookie(request, response, COOKNAME_CART, JsonUtils.objectToJson(itemList), true);
 		return "cartSuccess";
