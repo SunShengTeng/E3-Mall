@@ -96,7 +96,7 @@
     </div>
   </div>
   <div class="orderTbody" style="width:958px;border-bottom:0 none;">
-  <div class="backToCart"><a style=" text-decoration:underline;" target="" href="http://localhost:8085/cart/cart">返回修改购物车</a></div>
+  <div class="backToCart"><a style=" text-decoration:underline;" target="" href="http://cart.e3mall.com/cart/cart">返回修改购物车</a></div>
   <h3 class="orderTitle">商品信息：</h3>
   <span class="clear"></span>
   <div class="orderPItem">
@@ -121,12 +121,12 @@
 				<c:forEach items="${cartList }" var="cart" varStatus="status">
 				<div class="orderPInfo">
 					<div class="pItem">
-						<a href="http://localhost:8086/item/${cart.id}.html" target="_blank">
+						<a href="http://item.e3mall.com/item/${cart.id}.html" target="_blank">
 						<img src="${cart.image}" style="width: 60px;height: 60px;"/>
 						</a>
 					</div>
 					<div class="pItem pGoods">
-						<a href="http://localhost:8086/item/${cart.id}.html" target="_blank">${cart.title }</a>
+						<a href="http://item.e3mall.com/item/${cart.id}.html" target="_blank">${cart.title }</a>
 					</div>
 					<div class="pItem pPrice" style="position: relative; z-index: 99">
 						¥<fmt:formatNumber

@@ -106,6 +106,9 @@
 				<configuration>
 					<port>8086</port>
 					<path>/</path>
+					<url>http://192.168.169.166:8085/manager/text</url>
+					<username>admin</username>
+					<password>admin</password>					
 				</configuration>
 			</plugin>
 		</plugins>

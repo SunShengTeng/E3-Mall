@@ -1,0 +1,62 @@
+
+# 服务端
+drwxrwxrwx. 9 root root 160 5月   5 12:13 manager-service 8080 8005 8009 20880
+drwxrwxrwx. 9 root root 160 5月   5 12:13 content-service 8081 8006 8010 
+drwxrwxrwx. 9 root root 160 5月   5 12:13 search-service  8082 8007 8011
+drwxrwxrwx. 9 root root 160 5月   5 12:13 cart-service    8083 8008 8012
+drwxrwxrwx. 9 root root 160 5月   5 12:14 order-service   8084 8109 8013
+drwxrwxrwx. 9 root root 160 5月   5 12:14 sso-service     8085 8110 8014
+
+#web端
+drwxrwxrwx. 9 root root 160 5月   5 12:19 manager-web-8080. 8080 8005 8009 manager.e3mall.com
+drwxrwxrwx. 9 root root 160 5月   5 12:22 shop-web-8081.    8081 8006 8010 www.e3mall.com
+drwxrwxrwx. 9 root root 160 5月   5 12:19 search-web-8082.  8082 8007 8011 search.e3mall.com
+drwxrwxrwx. 9 root root 160 5月   5 12:19 item-web-8083.    8083 8008 8012 item.e3mall.com
+drwxrwxrwx. 9 root root 160 5月   5 12:20 cart-web-8084.    8084 8109 8013 cart.e3mall.com
+drwxrwxrwx. 9 root root 160 5月   5 12:20 order-web-8085.   8085 8110 8014 order.e3mall.com
+drwxrwxrwx. 9 root root 160 5月   5 12:20 sso-web-8086      8086 8111 8015 sso.e3mall.com
+
+
+
+
+
+# 配置tomcat热部署服务的登陆账号/密码
+<role rolename="admin-gui"/>
+<role rolename="admin-script"/>
+<role rolename="manager-gui"/>
+<role rolename="manager-script"/>
+<role rolename="manager-jmx"/>
+<role rolename="manager-status"/>
+<user username="tomcat" password="tomcat" roles="admin-gui,manager-gui"/>
+<user username="admin" password="admin" roles="manager-gui,manager-script,manager-jmx,manager-status,admin-gui,admin-script"/>
+
+# StartALl.sh
+sh cart-service-8083/bin/startup.sh
+sh content-service-8081/bin/startup.sh
+sh manager-service-8080/bin/startup.sh
+sh order-service-8084/bin/startup.sh
+sh search-service-8082/bin/startup.sh
+sh sso-service-8085/bin/startup.sh
+
+# StopAll.sh
+sh cart-service-8083/bin/shutdown.sh
+sh content-service-8081/bin/shutdown.sh
+sh manager-service-8080/bin/shutdown.sh
+sh order-service-8084/bin/shutdown.sh
+sh search-service-8082/bin/shutdown.sh
+sh sso-service-8085/bin/shutdown.sh
+
+
+# Web Host 
+192.168.169.167 www.nginx.com
+192.168.169.163 images.sst.com
+192.168.169.167 manager.e3mall.com 
+192.168.169.167 www.e3mall.com
+192.168.169.167 search.e3mall.com
+192.168.169.167 item.e3mall.com
+192.168.169.167 cart.e3mall.com
+192.168.169.167 order.e3mall.com
+192.168.169.167 sso.e3mall.com
+
+# 备注：需要服务器配置环境的联系：sst752033141(微信名：随风飘荡的小逗逼)如果我还存着的话！！！！！！
+
