@@ -23,7 +23,7 @@
             warehouse: 0,
             homeurl: 'http://home.e3mall.cn',
             staticurl: 'http://i.e3mall.cn/html',
-            passporturl: 'https://passport.e3mall.cn',
+            passporturl: 'http://sso.e3mall.com/page/register',
             businessModel: 3,
 		commentType : 0
 	};

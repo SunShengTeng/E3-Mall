@@ -8,6 +8,8 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.log4j.Logger;
+
 
 /**
  * 
@@ -16,6 +18,7 @@ import javax.servlet.http.HttpServletResponse;
  */
 public final class CookieUtils {
 
+	private static Logger logger = Logger.getLogger(CookieUtils.class);
     /**
      * 得到Cookie的值, 不编码
      * 
@@ -132,7 +135,7 @@ public final class CookieUtils {
     }
 
     /**
-     * 设置Cookie的值，并使其在指定时间内生效
+     * 设置Cookie的值，并使其在指定时间内生效,默认utf8编码
      * 
      * @param cookieMaxage cookie生效的最大秒数
      */
@@ -144,13 +147,14 @@ public final class CookieUtils {
             } else if (isEncode) {
                 cookieValue = URLEncoder.encode(cookieValue, "utf-8");
             }
+            logger.debug("CookieName:" + cookieName + "CookieValue:" + cookieValue);
             Cookie cookie = new Cookie(cookieName, cookieValue);
             if (cookieMaxage > 0)
                 cookie.setMaxAge(cookieMaxage);
             if (null != request) {// 设置域名的cookie
             	String domainName = getDomainName(request);
-            	System.out.println(domainName);
-                if (!"localhost".equals(domainName)) {
+                if (!"localhost".equals(domainName)) {               
+                	logger.debug("当前项目的二级域名为：" + domainName);
                 	cookie.setDomain(domainName);
                 }
             }
@@ -162,7 +166,7 @@ public final class CookieUtils {
     }
 
     /**
-     * 设置Cookie的值，并使其在指定时间内生效
+     * 设置Cookie的值，并使其在指定时间内生效，自定义编码
      * 
      * @param cookieMaxage cookie生效的最大秒数
      */
@@ -174,6 +178,7 @@ public final class CookieUtils {
             } else {
                 cookieValue = URLEncoder.encode(cookieValue, encodeString);
             }
+            
             Cookie cookie = new Cookie(cookieName, cookieValue);
             if (cookieMaxage > 0)
                 cookie.setMaxAge(cookieMaxage);
@@ -209,10 +214,10 @@ public final class CookieUtils {
             int len = domains.length;
             if (len > 3) {
                 // www.xxx.com.cn
-                domainName = "." + domains[len - 3] + "." + domains[len - 2] + "." + domains[len - 1];
+                domainName = domains[len - 3] + "." + domains[len - 2] + "." + domains[len - 1];
             } else if (len <= 3 && len > 1) {
                 // xxx.com or xxx.cn
-                domainName = "." + domains[len - 2] + "." + domains[len - 1];
+                domainName = domains[len - 2] + "." + domains[len - 1];
             } else {
                 domainName = serverName;
             }

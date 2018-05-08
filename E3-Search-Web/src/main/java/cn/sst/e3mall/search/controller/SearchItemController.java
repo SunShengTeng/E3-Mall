@@ -1,6 +1,7 @@
 package cn.sst.e3mall.search.controller;
 
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
@@ -19,6 +20,8 @@ import cn.sst.e3mall.search.service.IItemCategory;
 @Controller
 public class SearchItemController {
 
+	private static Logger logger = Logger.getLogger(SearchItemController.class);
+	
 	@Autowired
 	private IItemCategory itemService;
 	
@@ -27,8 +30,8 @@ public class SearchItemController {
 	
 	@RequestMapping(value="/search")
 	public String searchItemList(String keyword,@RequestParam(defaultValue = "1") Integer page,Model model) throws Exception{
-		// 转换get请求中的中文乱码
-		keyword = new String(keyword.getBytes("iso8859-1"), "utf-8");
+		// 转换get请求中的中文乱码(线上tomcat9貌似不需要此操作，tomcat环境应该配置全局编码了)
+		// keyword = new String(keyword.getBytes("iso8859-1"), "utf-8");
 		// 查询索引数据
 		SearchResult result = itemService.searchItemList(keyword, page, PAGE_ROWS);
 		model.addAttribute("query", keyword);
