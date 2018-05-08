@@ -32,7 +32,7 @@ public class LoginController {
 	 */
 	@RequestMapping("/user/login")
 	@ResponseBody
-	public E3Result loginByUsernamePassword(String username, String password, HttpServletRequest request,
+	public E3Result loginByUsernamePassword(String redirectUrl, String username, String password, HttpServletRequest request,
 			HttpServletResponse response) {
 		// 1、登陆
 		E3Result result = loginService.loginByUsernamePassword(username, password);
@@ -40,13 +40,14 @@ public class LoginController {
 		if (result.getStatus() == 200) {
 			CookieUtils.setCookie(request, response, "token", result.getData().toString());
 		}
+		// 3、登陆成功以后,写入需要跳转的目标页面
+	    request.setAttribute("redirectUrl", redirectUrl);
 		return result;
 	}
 	
 	@RequestMapping("/user/logout")
 	public String logout(HttpServletRequest request) {
-		//TODO
-		// 1、删除redis中的token
+	    // 1、删除redis中的token
 		try {
 			String token = CookieUtils.getCookieValue(request, "token");
 			loginService.logout(token);
